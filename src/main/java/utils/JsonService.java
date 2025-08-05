@@ -3,12 +3,9 @@ package utils;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import exceptions.TypeSafetyException;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.Set;
 
 public class JsonService {
 
@@ -68,36 +65,6 @@ public class JsonService {
             throw new RuntimeException("Failed to deserialize response array: " + e.getMessage(), e);
         }
     }
-
-    private Validator createValidator() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        return factory.getValidator();
-    }
-
-    /**
-     * Validate object using Bean Validation annotations
-     */
-//    private <T> void validateObject(T object) throws TypeSafetyException {
-//        if (object == null) {
-//            return;
-//        }
-//
-//        Set<ConstraintViolation<T>> violations = validator.validate(object);
-//
-//        if (!violations.isEmpty()) {
-//            StringBuilder errorMessage = new StringBuilder();
-//            errorMessage.append("Validation failed for ").append(object.getClass().getSimpleName()).append(": ");
-//
-//            for (ConstraintViolation<T> violation : violations) {
-//                errorMessage.append(violation.getPropertyPath())
-//                        .append(" ")
-//                        .append(violation.getMessage())
-//                        .append("; ");
-//            }
-//
-//            throw new TypeSafetyException(errorMessage.toString());
-//        }
-//    }
 
     /**
      * Type-safe method to validate that JSON structure matches expected schema
